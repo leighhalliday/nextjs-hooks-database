@@ -1,0 +1,10 @@
+{
+  "env": {
+    "PG_CONNECTION_HOOKS_DEMO": "@pg-connection-hooks-demo"
+  },
+  "build": {
+    "env": {
+      "PG_CONNECTION_HOOKS_DEMO": "@pg-connection-hooks-demo"
+    }
+  }
+}
