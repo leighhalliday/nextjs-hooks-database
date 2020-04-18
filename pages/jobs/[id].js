@@ -1,16 +1,8 @@
-import Head from "next/head";
 import { db } from "../../src/db";
 
 export default function Job({ job, company }) {
   return (
     <div>
-      <Head>
-        <title>
-          {job.title} @ {company.name}
-        </title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <h1>
         {job.title} @ {company.name}
       </h1>
