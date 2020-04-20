@@ -14,6 +14,6 @@ In this video we'll explore this hook, along with two others for building static
 
 - Source code: https://github.com/leighhalliday/nextjs-hooks-database
 - Deployed app: https://next-hooks-database.now.sh/
-- Full Static Radio episode about Next.js: https://next-hooks-database.now.sh
+- Full Stack Radio episode about Next.js: http://www.fullstackradio.com/137
 - Release notes for Next.js 9.3: https://nextjs.org/blog/next-9-3
 - Learn JavaScript, React & more with Treehouse (affiliate link): https://treehouse.7eer.net/c/1214671/228915/3944
