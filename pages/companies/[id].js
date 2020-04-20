@@ -2,46 +2,40 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { db } from "../../src/db";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 export default function Company({ company }) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <div>Loading...</div>;
+    return <div>Loading company...</div>;
   }
 
   return (
     <div>
-      <h1>{company.name}</h1>
+      <h1>Jobs @ {company.name}</h1>-{" "}
       <p>
-        <a href={company.url}>{company.url}</a>
+        <a href={company.url}>{company.url}</a>-{" "}
       </p>
       <p>{company.about}</p>
-
       <Jobs id={company.id} />
     </div>
   );
 }
 
-const Jobs = ({ id }) => {
-  const { data: jobs } = useSWR(`/api/jobs?company_id=${id}`, fetcher);
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  if (!jobs) return null;
+function Jobs({ id }) {
+  const { data: jobs, loading } = useSWR(`/api/jobs?company_id=${id}`, fetcher);
+
+  if (!jobs || loading) return null;
 
   return (
-    <div>
-      <h2>Jobs Jobs Jobs</h2>
-      <ul>
-        {jobs.map((job) => (
-          <li key={job.id}>
-            <a>{job.title}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {jobs.map((job) => (
+        <li key={job.id}>{job.title}</li>
+      ))}
+    </ul>
   );
-};
+}
 
 export async function getStaticPaths() {
   const companies = await db
@@ -49,10 +43,14 @@ export async function getStaticPaths() {
     .from("companies")
     .where({ featured: true });
 
+  const paths = companies.map(({ id }) => {
+    return {
+      params: { id: id.toString() },
+    };
+  });
+
   return {
-    paths: companies.map((company) => ({
-      params: { id: company.id.toString() },
-    })),
+    paths,
     fallback: true,
   };
 }
@@ -64,5 +62,7 @@ export async function getStaticProps({ params }) {
     .where({ id: params.id })
     .first();
 
-  return { props: { company } };
+  return {
+    props: { company },
+  };
 }

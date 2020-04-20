@@ -29,5 +29,7 @@ export async function getServerSideProps({ params, res }) {
     .where({ id: job.company_id })
     .first();
 
-  return { props: { job, company } };
+  return {
+    props: { job, company },
+  };
 }
