@@ -11,9 +11,9 @@ export default function Company({ company }) {
 
   return (
     <div>
-      <h1>Jobs @ {company.name}</h1>-{" "}
+      <h1>Jobs @ {company.name}</h1>
       <p>
-        <a href={company.url}>{company.url}</a>-{" "}
+        <a href={company.url}>{company.url}</a>
       </p>
       <p>{company.about}</p>
       <Jobs id={company.id} />
