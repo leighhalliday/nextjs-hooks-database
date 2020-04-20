@@ -24,9 +24,9 @@ export default function Company({ company }) {
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function Jobs({ id }) {
-  const { data: jobs, loading } = useSWR(`/api/jobs?company_id=${id}`, fetcher);
+  const { data: jobs, error } = useSWR(`/api/jobs?company_id=${id}`, fetcher);
 
-  if (!jobs || loading) return null;
+  if (!jobs || error) return null;
 
   return (
     <ul>
